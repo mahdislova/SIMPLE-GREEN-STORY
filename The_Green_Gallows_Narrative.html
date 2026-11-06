@@ -1,0 +1,711 @@
+<!doctype html><html><head><meta charset=utf8><meta name=viewport content="width=device-width,initial-scale=1,viewport-fit=cover"><style>:root{color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}html{scroll-padding-top:env(safe-area-inset-top,0px)}body{margin:0;padding:0;font:14px -apple-system,BlinkMacSystemFont,sans-serif;background:#fff;color:#000}img{max-width:100%}[hidden]:not([hidden=until-found i]){display:none!important}</style></head><body>
+<title>The Green Gallows</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400&family=Inter:wght@400;500;600&display=swap">
+<style>
+  /* Layout: single-column editorial longread, episode sections with atmospheric dividers */
+  :root {
+    --bg: #0e0f11;
+    --fg: #d4cfc6;
+    --fg-muted: #8a8578;
+    --accent: #4a7a56;
+    --accent-glow: #5fa86d;
+    --surface: #16171b;
+    --border: #2a2b2f;
+    --heading: #e8e3d8;
+    --ep-num: #3d6647;
+    color-scheme: dark;
+  }
+  @media (prefers-color-scheme: light) {
+    :root:not([data-theme="dark"]) {
+      --bg: #f5f2ec;
+      --fg: #2c2a25;
+      --fg-muted: #6b6760;
+      --accent: #3d6647;
+      --accent-glow: #4a7a56;
+      --surface: #eae6dd;
+      --border: #d0cbc0;
+      --heading: #1a1815;
+      --ep-num: #b8cebe;
+      color-scheme: light;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #f5f2ec;
+    --fg: #2c2a25;
+    --fg-muted: #6b6760;
+    --accent: #3d6647;
+    --accent-glow: #4a7a56;
+    --surface: #eae6dd;
+    --border: #d0cbc0;
+    --heading: #1a1815;
+    --ep-num: #b8cebe;
+    color-scheme: light;
+  }
+  body {
+    background: var(--bg);
+    color: var(--fg);
+    font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif;
+    font-size: 19px;
+    line-height: 1.72;
+    padding-left: max(16px, env(safe-area-inset-left, 0px));
+    padding-right: max(16px, env(safe-area-inset-right, 0px));
+    padding-block: 0;
+  }
+  .wrapper {
+    max-width: 680px;
+    margin: 0 auto;
+    padding-block: 3rem 6rem;
+  }
+  .hero {
+    text-align: center;
+    padding: 4rem 0 3rem;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 3rem;
+  }
+  .hero h1 {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(2.2rem, 6vw, 3.4rem);
+    color: var(--heading);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin: 0 0 0.3em;
+    text-wrap: balance;
+  }
+  .hero .subtitle {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent-glow);
+    margin: 0 0 1.5rem;
+  }
+  .hero .tagline {
+    font-style: italic;
+    font-size: 1.15rem;
+    color: var(--fg-muted);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+  .episode {
+    margin-bottom: 3.5rem;
+  }
+  .ep-header {
+    display: flex;
+    align-items: baseline;
+    gap: 1rem;
+    margin-bottom: 1.2rem;
+    flex-wrap: wrap;
+  }
+  .ep-number {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--accent-glow);
+    white-space: nowrap;
+  }
+  .ep-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-weight: 700;
+    font-size: clamp(1.5rem, 4vw, 2rem);
+    color: var(--heading);
+    margin: 0;
+    line-height: 1.2;
+  }
+  .ep-countdown {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    width: 100%;
+    margin-top: -0.2rem;
+  }
+  .ep-body p {
+    margin: 0 0 1.1em;
+  }
+  .ep-body p:last-child {
+    margin-bottom: 0;
+  }
+  .divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 3.5rem 0;
+    color: var(--ep-num);
+  }
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: var(--border);
+  }
+  .divider svg {
+    width: 18px;
+    height: 18px;
+    fill: currentColor;
+    opacity: 0.6;
+  }
+  .dialogue {
+    font-style: italic;
+  }
+  .scene-break {
+    text-align: center;
+    color: var(--ep-num);
+    margin: 1.5em 0;
+    font-size: 1.2rem;
+    letter-spacing: 0.3em;
+  }
+  nav.toc {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 1.5rem 1.8rem;
+    margin-bottom: 3rem;
+  }
+  nav.toc h2 {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.68rem;
+    font-weight: 600;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--fg-muted);
+    margin: 0 0 1rem;
+  }
+  nav.toc ol {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 0.5rem 1.5rem;
+  }
+  nav.toc a {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1.05rem;
+    color: var(--fg);
+    text-decoration: none;
+    display: flex;
+    align-items: baseline;
+    gap: 0.6rem;
+    padding: 0.2rem 0;
+    transition: color 0.15s;
+  }
+  nav.toc a:hover,
+  nav.toc a:focus-visible {
+    color: var(--accent-glow);
+  }
+  nav.toc .toc-num {
+    font-family: 'Inter', system-ui, sans-serif;
+    font-size: 0.62rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    color: var(--fg-muted);
+    min-width: 1.4em;
+  }
+  @media (max-width: 500px) {
+    body { font-size: 17px; }
+    .hero { padding: 2.5rem 0 2rem; }
+    nav.toc ol { grid-template-columns: 1fr; }
+  }
+</style>
+
+<div class="wrapper">
+  <header class="hero">
+    <h1>The Green Gallows</h1>
+    <p class="subtitle">Season One &mdash; What You See</p>
+    <p class="tagline">Ten episodes. No behind-the-curtain notes. Just the story as it hits you.</p>
+  </header>
+
+  <nav class="toc">
+    <h2>Episodes</h2>
+    <ol>
+      <li><a href="#ep1"><span class="toc-num">01</span> The Engagement</a></li>
+      <li><a href="#ep2"><span class="toc-num">02</span> The Wake</a></li>
+      <li><a href="#ep3"><span class="toc-num">03</span> Lanterns</a></li>
+      <li><a href="#ep4"><span class="toc-num">04</span> The Hearing</a></li>
+      <li><a href="#ep5"><span class="toc-num">05</span> Lantern Night</a></li>
+      <li><a href="#ep6"><span class="toc-num">06</span> Coal</a></li>
+      <li><a href="#ep7"><span class="toc-num">07</span> The Girl Who Isn&rsquo;t</a></li>
+      <li><a href="#ep8"><span class="toc-num">08</span> The Wedding</a></li>
+      <li><a href="#ep9"><span class="toc-num">09</span> The Snow Confession</a></li>
+      <li><a href="#ep10"><span class="toc-num">10</span> The Tithe</a></li>
+    </ol>
+  </nav>
+
+  <!-- EPISODE 1 -->
+  <section class="episode" id="ep1">
+    <div class="ep-header">
+      <span class="ep-number">Episode 1</span>
+      <h2 class="ep-title">&ldquo;The Engagement&rdquo;</h2>
+      <span class="ep-countdown">49 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>We open in 1489. A gallows field at night. Something huge is breathing underground in a pit of iron, and all we see is one hand &mdash; blue ice, the size of a cartwheel, with an iron hook through it. A man named Alistair Harding cuts its wrist. The blood runs green and ignites inside a lantern. The first gallowglass light. His boy, nine years old, holds the lantern up for him, proud. Behind them a tiny girl made of frost slips out of the pit and runs into the dark. At the treeline, a young woman in Harding colours sees everything and backs away before anyone notices her.</p>
+
+      <p>Cut to 1889. London glows green. Every lamp, every tram, every furnace burns gallowglass &mdash; a crystal the Harding family grows at their Works on the old gallows field. That&rsquo;s the official story.</p>
+
+      <p>Underground, two sisters run contraband through the lamp tunnels. Alice Bounds, twenty today, and her older sister Miriam. They&rsquo;re fast, funny, and broke. A buyer makes a crack about crying he hears in the crystal. Then he pulls his belt loose to tie a pipe, and the buckle clangs on iron. Alice flinches across the tunnel before she knows she&rsquo;s moved. Miriam sees it. Looks away. Then steals an orange from the man, tosses it to Alice, and laughs. It&rsquo;s Alice&rsquo;s birthday. Miriam doesn&rsquo;t say so. She&rsquo;s distracted. She&rsquo;s wearing a ring on a cord under her collar that she thinks nobody&rsquo;s noticed.</p>
+
+      <p>At the Harding Works, Nathaniel Harding, twenty-one, the second son, straps on a prototype jump-gauntlet he&rsquo;s been building alone. He rockets across the foundry and lands in a coal bin. Byron, the old butler, picks soot out of his hair. These two have been doing this for years &mdash; the butler is his only audience. Tonight Nathaniel plans to show his father.</p>
+
+      <p>At Harding House, the patriarch Eldgard tells his eldest son Jamie that tonight begins &ldquo;his preparation.&rdquo; Jamie says he already knows what the Tithe is. He leaves his pocket watch on his father&rsquo;s desk, wound, like a man who won&rsquo;t need to know the time anymore.</p>
+
+      <p>At the Lantern Guard tower, Nixon Hargrave, twenty-three, becomes the youngest captain in the corps. Eldgard pins the glass lantern to his collar: <span class="dialogue">&ldquo;My family looks after its own.&rdquo;</span> A seventeen-year-old recruit named Cole tries to salute and smacks himself in the eye.</p>
+
+      <p>At a steam laundry in Shadwell, a woman called Mother Grise gives Alice her first real contract. A sealed envelope. The target: the second Harding son. Get close. Report everything.</p>
+
+      <p>That night. A ball at Harding House, a thousand green chandeliers. Alice sneaks in as a lamp-girl. She watches her sister kiss Jamie Harding in a coach on the way there. A Harding. Her sister is in love with a Harding, and never told her.</p>
+
+      <p>At the ball, Nathaniel&rsquo;s engagement to Tamara Lambrick is announced. Their fathers arranged it. Tamara carries a cipher wheel inside her fan. She and Nathaniel agree to be very polite to each other for forty years. Across the room, Nixon watches Tamara and looks away when she looks back.</p>
+
+      <p>Then Nathaniel steps into the light to show his father the gauntlet. Eldgard, smiling for the room: <span class="dialogue">&ldquo;Not tonight. Toys after supper.&rdquo;</span> Laughter. Nathaniel&rsquo;s face crumbles. On his way out, he passes Nixon at the door. <span class="dialogue">&ldquo;He pinned your lantern himself today. You&rsquo;re the son he actually wanted, Nix.&rdquo;</span></p>
+
+      <p>The lights go out.</p>
+
+      <p>Not just the ballroom. London. Street by street, the green dies across the city. In the black ballroom, Nathaniel hears a woman crying inside the walls. Nobody else does. One match flares &mdash; the lamp-girl, cupping it, the only light in the room. He finds her by it.</p>
+
+      <p><span class="dialogue">&ldquo;Do you hear that?&rdquo;</span></p>
+
+      <p><span class="dialogue">&ldquo;Hear what, sir?&rdquo;</span></p>
+
+      <p>The match burns down to her fingers and she doesn&rsquo;t flinch. He notices. She tells him to ask her name when the lights come back on, blows out the flame, and lifts the schematic of his gauntlet from his coat on the way out.</p>
+
+      <p>Below the Works, Jamie has broken in with a copied key. He cuts at an iron lock with a crystal blade until his hand bleeds into it. The chain shudders. Alarm. Nixon leads his squad down into strobe-lit darkness. A masked figure at the lock. Nixon fires his rifle. The figure drops. He pulls off the mask. It&rsquo;s Jamie.</p>
+
+      <p>Eldgard steps out of the dark: <span class="dialogue">&ldquo;Go, Captain. Wait at the gate. Speak to no one.&rdquo;</span></p>
+
+      <p>On Blackwood Bridge, Miriam waits in red wool mittens for a man who isn&rsquo;t coming. Frost creeps up the iron rail and up her coat. A small girl made of frost is standing beside her. Miriam asks her something we can&rsquo;t hear. The girl nods.</p>
+
+      <p>Alice finds her sister frozen solid on the bridge, eyes open, inside a perfect ring of frost on a night with no frost anywhere else.</p>
+
+      <p>Dawn. Eldgard tells the family Jamie died in an accident. Nixon finds Nathaniel broken in the stables and holds him. His best friend&rsquo;s brother&rsquo;s blood still under his fingernails.</p>
+
+      <p>The morgue. An inspector named Felix Hawke pulls back the sheet. Alice identifies her sister. She touches Miriam&rsquo;s cold hand. The frost melts under her fingers. The corpse&rsquo;s eyes move to Alice.</p>
+
+      <p><span class="dialogue">&ldquo;Ali.&rdquo;</span></p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 2 -->
+  <section class="episode" id="ep2">
+    <div class="ep-header">
+      <span class="ep-number">Episode 2</span>
+      <h2 class="ep-title">&ldquo;The Wake&rdquo;</h2>
+      <span class="ep-countdown">47 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>The thing in Miriam&rsquo;s body sits up screaming &mdash; a sound like glass splitting &mdash; and two morgue attendants freeze where they stand. She runs barefoot into the night. Alice runs after her.</p>
+
+      <p>Alice follows a trail of frost across rooftops and finds her &ldquo;sister&rdquo; curled inside a lamp tower, draining its crystal to get warm. Alice talks her down with a counting game from when they were small &mdash; <span class="dialogue">&ldquo;one post, two post&rdquo;</span> &mdash; and the creature counts back in Miriam&rsquo;s voice, because the body knows the words even if she doesn&rsquo;t. An old herb-woman named Wren examines her, hears a heart barely beating, and tells Alice it&rsquo;s shock and cold from the bridge. The memories will come back. Alice chooses to believe her.</p>
+
+      <p>The thing that came back meets bread, a kettle, and a cat. She calls Alice &ldquo;Ali&rdquo; exactly the way Miriam did. Then she picks up the cat and it freezes stiff in her arms. She stares at it. She doesn&rsquo;t understand death. Alice does. Rules: gloves on, no touching, until the cold passes. Miriam&rsquo;s red mittens go on her hands. Alice tells her she&rsquo;ll be herself again soon. The creature looks at her a long time, deciding something. <span class="dialogue">&ldquo;Yes, Ali.&rdquo;</span> The first lie. The first kindness.</p>
+
+      <p>Jamie&rsquo;s funeral. Nixon carries the coffin and it&rsquo;s wrong in his hands &mdash; heavier than a man and dead-still. Nathaniel gives the eulogy and breaks halfway. Among the Harding brasses on the church wall: <em>Ottoline Harding, 1820&ndash;1839, Died Abroad.</em> Nobody explains who she was.</p>
+
+      <p>At the graveside, Nathaniel recognises the lamp-girl from the ball. Two people grieving, one of them lying. He offers his handkerchief. She keeps it.</p>
+
+      <p>We learn that Josephine Harding, Nathaniel&rsquo;s mother, hired Alice&rsquo;s contract through Grise weeks ago. Josephine is old Vykra &mdash; a guild of undercity women. She doubled the contract now that Jamie is dead. <span class="dialogue">&ldquo;Keep him close. Keep him out of the Works. His father will use him.&rdquo;</span></p>
+
+      <p>Nathaniel forces his way into the Works and finds a spent Lantern Guard rifle cartridge at the scene of his brother&rsquo;s &ldquo;accident.&rdquo; He gives it to Nixon: <span class="dialogue">&ldquo;This is one of yours. Find me the one who was down there before.&rdquo;</span> Nixon takes the case. He is now investigating himself.</p>
+
+      <p>That night, Alice breaks into Jamie&rsquo;s bedroom looking for answers. She finds Nathaniel already there. They end up hiding in Jamie&rsquo;s wardrobe, chest to chest among his coats, while Eldgard comes in alone with a candle, sits on his dead son&rsquo;s bed, and winds Jamie&rsquo;s pocket watch. He doesn&rsquo;t say a word. Nathaniel nearly steps out. Alice puts her hand over his mouth. Among Jamie&rsquo;s things they find a hidden letter: an escape plan for two, and a diagram of the chain under the Works. Below it, a second staircase of thirteen steps going down from a hatch marked &ldquo;coal.&rdquo;</p>
+
+      <p>At the window, leaving, she gives him one true thing: <span class="dialogue">&ldquo;Bounds.&rdquo;</span> He asks for the rest. <span class="dialogue">&ldquo;Girls on Gin Lane don&rsquo;t give the rest of it to a Harding.&rdquo;</span> It&rsquo;s the only name he uses for her all season.</p>
+
+      <p>Felix, the inspector, tracks the frost girl to Gin Lane. She opens the door, frightened, and frost blooms across the doorframe. He leaves with a frozen hand and questions. That night the creature walks to the Harding Works and lays a mittened palm on the gate. Every lamp on the street bends its flame toward her. Nixon, on night watch, sees it.</p>
+
+      <p>Deep under the Works, something lifts its head for the first time in four hundred years. We see her face: blue ice, green fire in the eyes. Nine feet tall, hooks through her shoulders. Morgana.</p>
+
+      <p><span class="dialogue">&ldquo;My daughter is here.&rdquo;</span></p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 3 -->
+  <section class="episode" id="ep3">
+    <div class="ep-header">
+      <span class="ep-number">Episode 3</span>
+      <h2 class="ep-title">&ldquo;Lanterns&rdquo;</h2>
+      <span class="ep-countdown">42 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>A flashback: a charity school, ten years ago. Eldgard pricks boys&rsquo; fingers and touches the blood to slivers of gallowglass. Most stay dark. Thirteen-year-old Nixon&rsquo;s glows green. Eldgard pats his head: <span class="dialogue">&ldquo;Still good.&rdquo;</span> It looks like kindness.</p>
+
+      <p>Eldgard gives his two men their jobs. Nathaniel gets the one he&rsquo;s wanted his whole life: re-equip the Guard with his gauntlets and rigs for the Frost Killer hunt. In the corridor, out of earshot, Eldgard gives Nixon a different order. Find the frost girl. Bring her to the Works alive. Tell no one. The real son is arming the hunt. The spare is leading it. Neither knows the girl Alice is hiding is the target.</p>
+
+      <p>Alice finds the creature on a rooftop having a serious conversation with pigeons. Then the thing holds out an orange, peeled badly, in one long ruined spiral. <span class="dialogue">&ldquo;It was your birthday. On the bridge day. I forgot.&rdquo;</span> A piece of Miriam&rsquo;s regret surfacing in a body that doesn&rsquo;t know why her hands wanted to do this. Alice stares. <span class="dialogue">&ldquo;You&rsquo;ve never once remembered.&rdquo;</span> She eats the whole thing, pith and all.</p>
+
+      <p>Alice visits Nathaniel at the Works &ldquo;to return the handkerchief&rdquo; and reads the sweep roster upside down while he shows off his boosters &mdash; one jump across the foundry, into the coal bin again, for an audience of one. She gets what she came for and leaves feeling sick at how easy it was, and sicker at how much she liked watching. She doesn&rsquo;t return the handkerchief.</p>
+
+      <p>Felix corners Nixon. The frost girl is Miriam Bounds, who was dead. And the Harding boy didn&rsquo;t die in a fall &mdash; there was a bullet hole in his coat. Felix slides a Newgate prison visitor&rsquo;s slip across the desk: Jamie Harding, every Sunday for two years, prisoner 1417. Both of Nixon&rsquo;s secrets are walking toward each other.</p>
+
+      <p>Tamara, meanwhile, has broken into her father Lord Lambrick&rsquo;s cipher safe. She copies a ledger page: six months of payments to someone called A.F., ending the night Jamie died. On the stairs, Ajax Fink &mdash; Lambrick&rsquo;s enforcer &mdash; is eating an apple in the dark. <span class="dialogue">&ldquo;Evening, miss.&rdquo;</span> He lets her pass.</p>
+
+      <p>At a Christmas crystal market, the creature reaches out to a hundred lanterns, enchanted. Every crystal flares at once. A lookout spots it. Nixon&rsquo;s leapers launch across the stalls. Flash-bursts strobe the crowd. Trapped and terrified, the creature screams. Every crystal in the market shatters. Glass rains on the crowd. Four people die.</p>
+
+      <p>Nixon corners her alone in a bell tower. She reaches for Cole, freezing him from the hand up. Nixon can take the girl to Eldgard, or carry Cole to a furnace before his heart stops. He takes Cole. Alice drags the creature away.</p>
+
+      <p>Cole lives, but loses two fingers. Eldgard finds Nixon at the hospital. <span class="dialogue">&ldquo;You had her and you let her go.&rdquo;</span> Then, softly: <span class="dialogue">&ldquo;I know what you did at the core, Captain. So do you.&rdquo;</span> The leash tightens.</p>
+
+      <p>Nathaniel tracks Alice to the lamp tunnels under the Works using an engineer&rsquo;s trick &mdash; her bootleg gauntlet runs on his design and whines at his pitch. He could take the Frost Killer to his father tonight and finally be the useful son. The creature takes his bare hand. Nothing happens. No frost. He looks at Alice. He doesn&rsquo;t turn the girl in. First time in his life he acts against his own need to be useful.</p>
+
+      <p>He turns to go. The creature, sniffing the air: <span class="dialogue">&ldquo;You smell like the man who keeps my mother.&rdquo;</span></p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 4 -->
+  <section class="episode" id="ep4">
+    <div class="ep-header">
+      <span class="ep-number">Episode 4</span>
+      <h2 class="ep-title">&ldquo;The Hearing&rdquo;</h2>
+      <span class="ep-countdown">38 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>A flashback to the night of the blackout. Lambrick&rsquo;s coach at the Works gate. He&rsquo;s already paid Ajax to cut the outer grid and shame the Hardings at their own ball. Then Jamie steps out of the fog and pays Ajax double &mdash; to cut it at one exact minute so nobody notices one Harding going down to the core. Two men bought the same blackout for opposite reasons.</p>
+
+      <p>Nathaniel hides Alice and the creature in the abandoned orangery on the Harding estate. The creature makes snow for the first time &mdash; a little flurry over her palm &mdash; and laughs like a child. She tries to bring up something painful: <span class="dialogue">&ldquo;Ali. Under the bed&mdash;&rdquo;</span> Alice hands her an orange. <span class="dialogue">&ldquo;Eat that.&rdquo;</span> Shut down.</p>
+
+      <p>The Crown&rsquo;s hearing on the Harding Charter is in three days. Josephine reads the witness list and stops at one name: Inspector Felix Hawke, testifying on the death of James Harding. A bullet hole in front of the Crown means an inquiry. An inquiry goes down the core stair and finds what&rsquo;s waiting there.</p>
+
+      <p>Nathaniel and Alice ambush Ajax at the coal docks. A brutal fight &mdash; the Black Gauntlet hits like a steam hammer, and Nathaniel recognises his own stolen prototype in it. They hook Ajax onto a crane over the river. Upside down, Ajax laughs. <span class="dialogue">&ldquo;Your brother paid me. Lambrick paid me too, but your brother paid double. I cut the outer grid. I never touched him.&rdquo;</span> Then: <span class="dialogue">&ldquo;Your father went down after. Ask the Guard who fired.&rdquo;</span></p>
+
+      <p>Alice says pull him up &mdash; he&rsquo;s their only witness against Lambrick. Nathaniel&rsquo;s hand is on the lever. The man who helped kill his brother, or the one voice that can put Lambrick in the dock. He lets go. Ajax drops into the Thames.</p>
+
+      <p>Nixon, alone, in civilian clothes, visits prisoner 1417 in Newgate. An old man named Tobias Marsh, in the dark, picking at a string he calls his harp. He pinches Nixon&rsquo;s cheek through the bars: <span class="dialogue">&ldquo;Marian&rsquo;s chin! Marian&rsquo;s chin!&rdquo;</span> Then he sings: <span class="dialogue">&ldquo;Seven in the Orchard, ripe for the fall. One on the tree for the lantern&rsquo;s call. Thirteen steps down where the cold water drips, count the apples, kiss the stones&rsquo; lips.&rdquo;</span> Nixon leaves with a nursery rhyme and a cold feeling he can&rsquo;t name.</p>
+
+      <p>Grise tells Alice to hand over the frost girl. Alice refuses. Grise cuts the Vykra knot from her glove &mdash; she&rsquo;s out. She walks into the rain with nowhere to belong. Under an awning, she folds Nathaniel&rsquo;s handkerchief into her glove where the knot used to be.</p>
+
+      <p>The hearing. Lambrick argues the Hardings are hiding something. A veiled woman in the back row crosses to the witness stand during the recess with a glass of water. <span class="dialogue">&ldquo;You look pale, Inspector.&rdquo;</span> Felix drinks.</p>
+
+      <p>Felix stands to testify. <span class="dialogue">&ldquo;The deaths at the market were caused by a girl who should be dead, and the Harding Works&mdash;&rdquo;</span> He coughs. Frost spreads across his lips. His eyes go white. He dies on the stand. The Frost Killer is blamed. The vote swings toward the Hardings.</p>
+
+      <p>In the gallery, Tamara sees the veiled woman&rsquo;s glove on the stairs. Inside it, a Vykra knot. A needle drops. Tamara pockets it.</p>
+
+      <p>That night, Nixon finds his own rifle in the discharge log &mdash; one round, 2 November. He tears the page out and burns it. From the bunk-room door, Cole watches. Later he copies the page from memory into his diary.</p>
+
+      <p>Josephine lifts her veil. Peels off gloves with a Vykra knot stitched inside. Washes frost-dust from her fingertips. The water skins over with ice. In the mirror, Byron is standing in the doorway.</p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 5 -->
+  <section class="episode" id="ep5">
+    <div class="ep-header">
+      <span class="ep-number">Episode 5</span>
+      <h2 class="ep-title">&ldquo;Lantern Night&rdquo;</h2>
+      <span class="ep-countdown">33 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>1489 again. The raid that followed the first episode&rsquo;s prologue. Young Hargrave cousins, torches, and leading them the girl from the treeline &mdash; reaching the iron chain with a hammer. Alistair cuts her down at the lock. Someone screams &ldquo;Marian!&rdquo; By dawn the empty gallows field is full: three thousand Hargraves on Harding timber. Their wives and children are walked down thirteen steps into the dark. This heist has been tried before.</p>
+
+      <p>Eldgard finally brings Nathaniel into &ldquo;the work&rdquo; &mdash; a cathedral of glass vats where engineers grow gallowglass from Tyburn iron. Nathaniel&rsquo;s joy is real and painful. The creature, back at the glasshouse: <span class="dialogue">&ldquo;He showed you a nice room. My mother isn&rsquo;t in a nice room.&rdquo;</span></p>
+
+      <p>Byron gives Nathaniel his old Guard key on a black ribbon. Jamie borrowed it in October, had it copied, and left a note: <span class="dialogue">&ldquo;If I don&rsquo;t come up, give it to Nat.&rdquo;</span> Byron guarded the core thirty years ago. <span class="dialogue">&ldquo;I heard her every night. I stopped hearing it when I stopped letting myself.&rdquo;</span> He hasn&rsquo;t carried a green lamp since.</p>
+
+      <p>On Lantern Night &mdash; London&rsquo;s festival of light &mdash; four plans converge on the Works. Nathaniel&rsquo;s team breaks in through a frozen outfall pipe. Lambrick&rsquo;s men plan to cut the grid and embarrass the Hardings. Nixon has orders to let Nathaniel through and seal the core behind him. And the creature wants her mother.</p>
+
+      <p>They go down. And we see her whole for the first time. Morgana. Nine feet of ice and green fire, iron hooks through her shoulders and hips, her blood running along channels into London. She&rsquo;s singing. It&rsquo;s the Weeping &mdash; the tune under every church hymn in London, stripped of its words.</p>
+
+      <p>The creature grabs the chain and for one second every song Miriam ever knew comes back into her at once. Then the chain burns her mittens to smoke. Morgana, to Alice: <span class="dialogue">&ldquo;You have my daughter&rsquo;s hand. Give it back.&rdquo;</span> Alice, holding tighter: <span class="dialogue">&ldquo;She&rsquo;s my sister.&rdquo;</span></p>
+
+      <p>To Nathaniel, almost gently: <span class="dialogue">&ldquo;You came down these stairs once, little Harding. And your brother is not dead. He is cold.&rdquo;</span></p>
+
+      <p>Nathaniel touches the chain and it tightens. Morgana screams. Across London the lamps surge brighter. His blood feeds it. For one frame, in the surge, he sees snow, and a man standing very still in it.</p>
+
+      <p>Eldgard steps out of the dark. <span class="dialogue">&ldquo;Now you know what your brother knew.&rdquo;</span> The Tithe: every fifty years, at first snow, a Harding walks down to the chain willingly, or it breaks. Jamie was raised for it. Jamie ran. <span class="dialogue">&ldquo;Now it&rsquo;s you.&rdquo;</span></p>
+
+      <p>The core door seals. Behind the glass &mdash; Nixon. Following orders. His lips move on the oath he swore on his first night as captain: <em>Light the dark. Keep the flame.</em> Over and over. Nathaniel sees his face through the glass.</p>
+
+      <p>The creature lets go of all her cold. The core freezes around Morgana. She screams. Her blood flares through every channel at once. Across London, on Lantern Night, every lamp blazes white for one heartbeat and bursts. Street after street. Glass rains on the festival crowds. People die against the railings on Westminster Bridge.</p>
+
+      <p>Alice blows the door. Tamara drags the creature out. Alice reaches for Nathaniel. He stays. <span class="dialogue">&ldquo;I need to hear the rest.&rdquo;</span> She leaves him there.</p>
+
+      <p>Father and son, alone with the prisoner. Nathaniel: <span class="dialogue">&ldquo;She said Jamie isn&rsquo;t dead. She said he&rsquo;s cold.&rdquo;</span> Eldgard: <span class="dialogue">&ldquo;She tells every Harding whatever will bring him to the lock. She told me my sister was still singing.&rdquo;</span> Then: <span class="dialogue">&ldquo;Thirty-three days. Help me find another way.&rdquo;</span></p>
+
+      <p>Nathaniel says yes. He chooses his father.</p>
+
+      <p>On a rooftop, Alice holds the creature&rsquo;s burned hand. <span class="dialogue">&ldquo;I&rsquo;m going to free her. Even if all of them freeze.&rdquo;</span></p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 6 -->
+  <section class="episode" id="ep6">
+    <div class="ep-header">
+      <span class="ep-number">Episode 6</span>
+      <h2 class="ep-title">&ldquo;Coal&rdquo;</h2>
+      <span class="ep-countdown">28 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>Thirty years ago. A young Byron, Guard sergeant on night watch, catches a Vykra girl sent to kill young Eldgard. It&rsquo;s Josephine, nineteen, and she&rsquo;s caught because she stopped &mdash; behind the core gate a woman is weeping, and she listened a breath too long. He lets her go. A year later she marries the man she was sent to kill.</p>
+
+      <p>Half the lamps in London are broken since Lantern Night. Coal carts with LAMBRICK on the side. Prices tripled. A child falls asleep in a Gin Lane doorway with frost in her eyelashes. By morning she isn&rsquo;t sleeping.</p>
+
+      <p>Eldgard and Nathaniel design the Heartglass &mdash; a resonance cage meant to hold the chain without a Harding death. Father and son at one bench, finishing each other&rsquo;s equations. Everything Nathaniel ever wanted. <span class="dialogue">&ldquo;We&rsquo;ll need something of her blood to tune it.&rdquo;</span></p>
+
+      <p>The creature&rsquo;s memories are going the wrong way. Every time the cold comes out of her, it costs one of Miriam&rsquo;s memories. She&rsquo;s forgotten Alice&rsquo;s birthday again. She&rsquo;s terrified. <span class="dialogue">&ldquo;There&rsquo;s something I have to say to you before it goes. About him. About the belt.&rdquo;</span> Alice: <span class="dialogue">&ldquo;After.&rdquo;</span> <span class="dialogue">&ldquo;There might not be an after.&rdquo;</span> <span class="dialogue">&ldquo;<em>After</em>, Mim.&rdquo;</span> The fence holds. The creature watches the thing she needs to say slipping further away.</p>
+
+      <p>Late at night, Alice climbs the Works wall to tell Nathaniel her sister has forgotten her birthday. Through the lit window she sees him and Eldgard at one bench, his father&rsquo;s hand on his shoulder, the Heartglass half-built between them. She doesn&rsquo;t knock. She wipes her breath off the pane and goes back down the wall.</p>
+
+      <p>Tamara overhears her father and Ajax: charges along the Tyburn conduit, set to blow on the night of the Charter vote. Then her father&rsquo;s voice: <span class="dialogue">&ldquo;And if she comes home and talks, Dr Cutler has signed the papers. I only need a second doctor.&rdquo;</span> A lunacy order. For his own daughter.</p>
+
+      <p>At a frozen canal, Nathaniel and Alice meet in secret. He tells her about the Heartglass. She tells him the creature is forgetting her. She pulls off a glove and something falls into the frost &mdash; his handkerchief, kept where a Vykra keeps the thing that says whose she is. He picks it up. <span class="dialogue">&ldquo;You kept it.&rdquo;</span> He kisses her. They&rsquo;ve both been waiting since the ballroom.</p>
+
+      <p>Byron confronts Josephine. <span class="dialogue">&ldquo;I saw your hands.&rdquo;</span> She killed Felix. <span class="dialogue">&ldquo;I did it for Nathaniel.&rdquo;</span> <span class="dialogue">&ldquo;You always say that.&rdquo;</span> He leaves. She sits alone and doesn&rsquo;t cry. Then a note from Grise arrives: the frost girl is going into the tunnels tonight. Josephine takes it to Eldgard. He sends for Nixon. The Heartglass needs the girl. The woman who just spared Byron&rsquo;s life has set the trap he&rsquo;ll die in.</p>
+
+      <p>Five plans meet in one tunnel under the gasworks. Alice and the creature going toward the core. Ajax&rsquo;s men lighting fuses. Nixon&rsquo;s squad waiting in the dark. Cole with an ultimatum &mdash; tell Nathaniel who fired, or I will. And Nathaniel, warned by Tamara&rsquo;s cipher, running in with his gauntlet.</p>
+
+      <p>The gasworks erupts. In the smoke, a green flash &mdash; Byron&rsquo;s old Lantern, the one he hasn&rsquo;t carried in thirty years. He finds Nathaniel under rubble and lifts the beam off him, taking its weight himself. It crushes him. Dying, he says: <span class="dialogue">&ldquo;Your mother killed the inspector. She does it for you. Don&rsquo;t let her.&rdquo;</span> A breath. <span class="dialogue">&ldquo;I let her go at the gate. Everything since came through that gate.&rdquo;</span> Then: <span class="dialogue">&ldquo;You were always enough.&rdquo;</span></p>
+
+      <p>The creature uses the last of her cold to smother flames around four trapped children. Then she looks at Alice politely, like a stranger. <span class="dialogue">&ldquo;Thank you, miss.&rdquo;</span> She doesn&rsquo;t know her name.</p>
+
+      <p>The Crown seizes the Works. Lambrick gets a seat on its board. Eldgard has lost everything.</p>
+
+      <p>Nathaniel walks in covered in ash. Josephine is at the piano. <span class="dialogue">&ldquo;Byron&rsquo;s dead.&rdquo;</span> She weeps. <span class="dialogue">&ldquo;He told me about Inspector Hawke.&rdquo;</span> The music stops.</p>
+
+      <p><span class="dialogue">&ldquo;Then you know I love you.&rdquo;</span></p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 7 -->
+  <section class="episode" id="ep7">
+    <div class="ep-header">
+      <span class="ep-number">Episode 7</span>
+      <h2 class="ep-title">&ldquo;The Girl Who Isn&rsquo;t&rdquo;</h2>
+      <span class="ep-countdown">21 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>Miriam&rsquo;s last morning, from Miriam&rsquo;s side. She&rsquo;s radiant. Sick in a basin. Hand on her belly. Alice is asleep. Miriam starts a letter: <em>Ali, about him, when we were small&mdash;</em> She stares at it. Scores it out until the paper tears. Starts again and writes it fast &mdash; three short lines we don&rsquo;t read. She means to leave it on Alice&rsquo;s pillow, loses her nerve, and sews it into her coat lining. Pulls on the red mittens.</p>
+
+      <p>Present day. Alice mends the burned coat and her needle catches on something in the lining. Folded paper, Miriam&rsquo;s hand. <em>I&rsquo;m leaving with him. I&rsquo;m sorry, Ali. Don&rsquo;t follow me.</em> Miriam was leaving her. Never meant to say goodbye.</p>
+
+      <p>Late, one candle. Alice holds out the letter. <span class="dialogue">&ldquo;You were leaving.&rdquo;</span> And the fence comes down, because she&rsquo;s too angry to hold it up: <span class="dialogue">&ldquo;You always left. You left me under that bed. Every time. You promised nothing would touch me, and then you counted fence posts while he&mdash;&rdquo;</span> Fifteen years, and she&rsquo;s finally said it out loud.</p>
+
+      <p>The creature has been waiting four weeks to be let in. She kneels on the floor, lower than Alice, the way you&rsquo;d kneel to a child under a bed. <span class="dialogue">&ldquo;I should have stood in front of you. Every time. I&rsquo;m sorry. I was so frightened of him that I let you be frightened alone.&rdquo;</span> Then: <span class="dialogue">&ldquo;If he came through that door now, I&rsquo;d stand in front of you. I&rsquo;d let him freeze.&rdquo;</span></p>
+
+      <p>It is the apology Alice has wanted her whole life. Word for word. Perfect. That&rsquo;s how she knows. Miriam couldn&rsquo;t have said it. Miriam <em>flinched.</em></p>
+
+      <p><span class="dialogue">&ldquo;Say my name.&rdquo;</span></p>
+
+      <p>Nothing.</p>
+
+      <p><span class="dialogue">&ldquo;You&rsquo;re not her.&rdquo;</span></p>
+
+      <p><span class="dialogue">&ldquo;No.&rdquo;</span> Morgana&rsquo;s daughter, wearing Miriam&rsquo;s body and memories like a coat. <span class="dialogue">&ldquo;Is she in there? Under you?&rdquo;</span> <span class="dialogue">&ldquo;No. She was gone before I opened her eyes.&rdquo;</span> Then the real horror, said gently, as a gift: <span class="dialogue">&ldquo;I&rsquo;m not sorry for her. I&rsquo;m sorry for me. I love you. I don&rsquo;t know whose that is anymore. I think it&rsquo;s mine.&rdquo;</span></p>
+
+      <p>Alice looks at the creature that remembered her birthday, peeled her an orange, and just gave her the only apology she&rsquo;s ever been given. <span class="dialogue">&ldquo;Get out.&rdquo;</span></p>
+
+      <p>On a rooftop, Nixon tells Nathaniel the truth. <span class="dialogue">&ldquo;I fired the shot. I didn&rsquo;t know it was him.&rdquo;</span> Nathaniel hits him. <span class="dialogue">&ldquo;Was Jamie alive when you left?&rdquo;</span> <span class="dialogue">&ldquo;Yes.&rdquo;</span> Fifteen years of friendship ends on a roof.</p>
+
+      <p>Tamara tells Alice what she found in the seized Harding files. The Heartglass folio. One line: <em>Vessel: White-born.</em> The cage Nathaniel built was for the creature. <span class="dialogue">&ldquo;Did Miriam ever stand in front of anybody?&rdquo;</span> Alice stops drinking.</p>
+
+      <p>The creature, thrown out, walks to Blackwood Bridge and cries. The tears freeze the air. The thin place on the bridge cracks, and wolves of the White pad out of the fog and bow to her.</p>
+
+      <p>Wolves pour through the streets of Whitechapel. Nixon&rsquo;s Lanterns fight in strobe &mdash; every flash shows a wolf somewhere closer. At a music hall, a singer keeps a hundred people singing &ldquo;Daisy Bell&rdquo; to drown out the scratching at the doors. Nathaniel and Nixon arrive from different rooftops. No words. They fight back to back.</p>
+
+      <p>The creature walks into the street of wolves and speaks one word in a language of wind. They stop. She kills the biggest with cold, turns the rest, and walks them back through the fog to the bridge. A hundred people watch. By morning she&rsquo;ll be the Frost Witch.</p>
+
+      <p>Alice reaches her through the wolves. The creature doesn&rsquo;t know her face. Alice: <span class="dialogue">&ldquo;I&rsquo;m Alice. I&rsquo;m your sister.&rdquo;</span></p>
+
+      <p>At St Bride&rsquo;s, Nathaniel breaks open his brother&rsquo;s coffin. Inside: three sacks of grey slag and a family Bible for weight. No body.</p>
+
+      <p>Alice tells Nathaniel about the Heartglass folio. <span class="dialogue">&ldquo;You built a cage for my sister.&rdquo;</span> He didn&rsquo;t know. She hits him harder than he hit Nixon. Tamara arrives with a lunacy order &mdash; her father&rsquo;s, for the day she opens her mouth about his books. <span class="dialogue">&ldquo;A wife&rsquo;s nearest relative is her husband. The wedding is in seven days. I&rsquo;d rather it were you than Bethlem.&rdquo;</span> Alice: <span class="dialogue">&ldquo;Marry her.&rdquo;</span> Both of them mean it, and both hate that they do.</p>
+
+      <p>On a rooftop, the creature asks Alice to teach her the counting game again. For the first time Alice tells her where it came from &mdash; the fence outside the window, eight posts, and he&rsquo;s done. The creature counts with her, and at eight she keeps going. <span class="dialogue">&ldquo;Nine.&rdquo;</span> <span class="dialogue">&ldquo;There&rsquo;s no nine.&rdquo;</span> <span class="dialogue">&ldquo;There is now. Nine is the one where we get up.&rdquo;</span></p>
+
+      <p>Tamara gives Nixon a folder. <span class="dialogue">&ldquo;It has your name on it.&rdquo;</span> Then she kisses him, a week before her wedding. Nixon doesn&rsquo;t open the folder.</p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 8 -->
+  <section class="episode" id="ep8">
+    <div class="ep-header">
+      <span class="ep-number">Episode 8</span>
+      <h2 class="ep-title">&ldquo;The Wedding&rdquo;</h2>
+      <span class="ep-countdown">14 Days to First Snow</span>
+    </div>
+    <div class="ep-body">
+      <p>Sixteen years ago. Nathaniel, five, follows a lullaby down forbidden stairs and finds a huge, gentle woman of ice who asks his name and sings it back to him. His father snatches him up and swings a lantern before his eyes. <span class="dialogue">&ldquo;You had a dream. You never heard anything.&rdquo;</span> It&rsquo;s the &ldquo;nightmare&rdquo; he&rsquo;s had his whole life.</p>
+
+      <p>The night before the wedding. The creature, who&rsquo;s never seen a wedding, insists on practising one. She plays the priest, reading from a prayer book held upside down with enormous solemnity, and makes Alice stand in for the bride. They say every word to each other and both mean every one. <span class="dialogue">&ldquo;You may now kiss the&mdash;&rdquo;</span> <span class="dialogue">&ldquo;That part isn&rsquo;t ours.&rdquo;</span></p>
+
+      <p>Morning. Josephine gives Nathaniel a receipt &mdash; the contract on her own son, in a clerk&rsquo;s hand: <em>Agent: Alice Bounds.</em> It&rsquo;s the first time he&rsquo;s ever seen Alice&rsquo;s first name, and it&rsquo;s on a bill. <span class="dialogue">&ldquo;She was paid to get close to you. By me.&rdquo;</span></p>
+
+      <p>He goes to the glasshouse. <span class="dialogue">&ldquo;Were you paid?&rdquo;</span> <span class="dialogue">&ldquo;At first.&rdquo;</span> He&rsquo;s already gone. The creature sends Alice to the wedding: <span class="dialogue">&ldquo;Go. Watch him. If you don&rsquo;t, you&rsquo;ll hate yourself, and then you&rsquo;ll hate me. I&rsquo;ll be here.&rdquo;</span> Alice goes.</p>
+
+      <p>Nixon opens the folder. His blood test. Eldgard&rsquo;s hand: <em>Hargrave, N. Cadet line of Harding. Reserve. Blood suitable.</em> He was never a charity case. He was a spare.</p>
+
+      <p>At the chapel, Tamara finds Nixon alone with the ring box. <span class="dialogue">&ldquo;Say one word and I&rsquo;ll walk out of this church with you.&rdquo;</span> He can&rsquo;t. <span class="dialogue">&ldquo;Then hand it to me properly.&rdquo;</span></p>
+
+      <p>The ceremony. Lambrick stands. <span class="dialogue">&ldquo;My daughter is unwell.&rdquo;</span> Attendants come up the aisle with a strait-coat and a lunacy order &mdash; his daughter, signed and sealed, two doctors, the Lord Chancellor in the front pew. Nixon&rsquo;s hand goes to his rifle. Nathaniel shakes his head once. The order names a spinster. Make her a wife and it names nobody. He looks up at Alice in the gallery. She nods once, like a permission. <span class="dialogue">&ldquo;I will.&rdquo;</span> Tamara: <span class="dialogue">&ldquo;I will.&rdquo;</span> Nixon blocks the attendants&rsquo; path &mdash; very slow, very polite. Hands over the ring. <span class="dialogue">&ldquo;Congratulations, miss.&rdquo;</span></p>
+
+      <p>The gallery rail is empty when he looks again.</p>
+
+      <p>Across the lawn, the Vykra come for the creature while everyone is in the chapel. She doesn&rsquo;t fight. She goes. On the glass she&rsquo;s written in frost: <em>DON&rsquo;T FOLLOW ME.</em> Alice runs, ten minutes too late. She was watching a wedding.</p>
+
+      <p>Vane&rsquo;s marshals arrest Eldgard on his wife&rsquo;s sworn word and a coffin full of slag. He&rsquo;s taken to Newgate. Josephine sold him to protect their son.</p>
+
+      <p>Nixon walks out holding the empty ring box. The crowd surges. Coal-men and believers clash. Vane orders the Lanterns to fire on the crowd. Nixon: <span class="dialogue">&ldquo;Lanterns, stand down.&rdquo;</span> Vane rips the lantern from his collar. <span class="dialogue">&ldquo;Keep the flame, Captain.&rdquo;</span> Nixon: <span class="dialogue">&ldquo;I am.&rdquo;</span> Forty Lanterns tear off their own and walk away with him.</p>
+
+      <p>Alone, in the dark, Nixon follows the old man&rsquo;s rhyme to a coal-hatch behind the Works. Thirteen steps down. Behind the last stone: a long gallery of iron-barred bunks, child-sized shackles, a wall of names. Each one a Hargrave. Tally marks headed <em>APPLES.</em> <em>Count the apples.</em> The children were the apples. The first name on the wall: <em>MARIAN, 1489.</em> The last name: <em>MARIAN,</em> with a date four years after he was told his mother died of fever.</p>
+
+      <p>In the core, Lambrick and Vane watch the Heartglass close around the creature beside Morgana. She speaks in the language of the White: <span class="dialogue">&ldquo;I&rsquo;ve come to take your place.&rdquo;</span> For four hundred years Morgana has wanted the door. Here it is. She screams. Not rage. Grief. She drags herself back onto the hooks and cracks the glass from her side. <span class="dialogue">&ldquo;Not her.&rdquo;</span></p>
+
+      <p>It begins to snow. Two weeks early. Everyone counts to the longest night. In four hundred years of ledgers, the snow has never come early.</p>
+
+      <p style="text-align:center; font-weight:700; letter-spacing:0.1em; color:var(--accent-glow); margin-top:2rem;">0 DAYS.</p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 9 -->
+  <section class="episode" id="ep9">
+    <div class="ep-header">
+      <span class="ep-number">Episode 9</span>
+      <h2 class="ep-title">&ldquo;The Snow Confession&rdquo;</h2>
+      <span class="ep-countdown">First Snow &mdash; Dusk to Midnight</span>
+    </div>
+    <div class="ep-body">
+      <p>Twenty years ago. Eldgard teaches five-year-old Jamie to skate, both laughing. <span class="dialogue">&ldquo;One day the city will need you to be very brave.&rdquo;</span> <span class="dialogue">&ldquo;I&rsquo;ll be brave, Papa.&rdquo;</span></p>
+
+      <p>In the glasshouse, snow falling through the broken panes, Nathaniel tells Alice the thing they&rsquo;ve both been avoiding. <span class="dialogue">&ldquo;You nodded, and I said it, and while we were saying it they took her.&rdquo;</span> She gives him the rest &mdash; the full truth. <span class="dialogue">&ldquo;At first I was paid. Then you flew across that foundry into a coal bin for an audience of one, and you looked at me like I was the first person who&rsquo;d ever watched. After that I&rsquo;d have done it for nothing.&rdquo;</span> She names the plan: midnight at the core. They need the ring on Eldgard&rsquo;s hand, and they need Nixon.</p>
+
+      <p>In a bell foundry, forty disgraced Lanterns cook sausages on gauntlets set to low. Nathaniel walks in. <span class="dialogue">&ldquo;You shot my brother.&rdquo;</span> <span class="dialogue">&ldquo;Yes.&rdquo;</span> <span class="dialogue">&ldquo;My father did the rest.&rdquo;</span> Silence. <span class="dialogue">&ldquo;What do you need?&rdquo;</span> <span class="dialogue">&ldquo;Newgate, then the Works.&rdquo;</span></p>
+
+      <p>Lambrick orders Tamara to deliver Nathaniel: if the creature fails in the cage, the Crown needs a Harding by midnight. She pretends to obey. Opens her father&rsquo;s safe one last time. Takes the Works master key and the full ledger.</p>
+
+      <p>Alice stops at Wren&rsquo;s door on her way to take the Vykra. <span class="dialogue">&ldquo;You knew. The first night. You held the mirror under her mouth, and you knew.&rdquo;</span> Wren doesn&rsquo;t deny it. <span class="dialogue">&ldquo;I knew you couldn&rsquo;t hear it yet. Five weeks you had a sister.&rdquo;</span></p>
+
+      <p>Alice calls a challenge by Vykra law. A knife fight among steaming sheets. She wins on the counting game &mdash; one post through eight, and on <em>nine</em> she moves. She spares Grise. The Vykra girls pick up their knives. <span class="dialogue">&ldquo;Where?&rdquo;</span> <span class="dialogue">&ldquo;Tyburn.&rdquo;</span></p>
+
+      <p>Nixon&rsquo;s forty come over the Newgate walls on leap-boosters in the snow. Nathaniel cuts the cell bars. Eldgard: <span class="dialogue">&ldquo;You came for me.&rdquo;</span> <span class="dialogue">&ldquo;I came for your ring.&rdquo;</span> Two cells down, Nixon quietly opens 1417. Old Marsh shuffles out, looks at the snow, and says, perfectly lucid: <span class="dialogue">&ldquo;They always count from the first snow.&rdquo;</span></p>
+
+      <p>On rooftops, Eldgard can&rsquo;t leap, so Nixon carries him &mdash; the spare carrying the man who bred him. <span class="dialogue">&ldquo;Thank you, Captain.&rdquo;</span> <span class="dialogue">&ldquo;Don&rsquo;t.&rdquo;</span></p>
+
+      <p>The whole young alliance stands together for the first time. Tamara&rsquo;s key turns. The Lanterns go over the walls and the Vykra go up the outfall. A three-way battle in the snow: Crown troops, mutineers, Lambrick&rsquo;s coal-men. Then the wolves come out of the drifts and attack everyone.</p>
+
+      <p>Ajax and the Black Gauntlet drive Nathaniel into the ground. <span class="dialogue">&ldquo;You should&rsquo;ve pulled me up, Harding.&rdquo;</span> The killing blow goes up, and Eldgard steps under it. His ribs give way. Alice drives Ajax off with flash after flash. She has the charge to chase him. She looks at the door to the core, where her sister is. She looks at Nathaniel on his knees with his father across his lap. She stays.</p>
+
+      <p>Nathaniel holds his father in the snow. <span class="dialogue">&ldquo;Did you hold his hand?&rdquo;</span> <span class="dialogue">&ldquo;I held his hand.&rdquo;</span> A breath. <span class="dialogue">&ldquo;Over the lock. Nixon&rsquo;s round went through his shoulder. He would have lived. I held his hand on the iron until the crack he&rsquo;d cut closed over.&rdquo;</span> Nathaniel doesn&rsquo;t let go. <span class="dialogue">&ldquo;It took all of him to mend it.&rdquo;</span></p>
+
+      <p>He turns to Nixon. <span class="dialogue">&ldquo;Cadet line. My spare. I took you from the Orchard at six. Your mother asked after you every day for four years, and I told her you were learning your letters.&rdquo;</span> Nixon: <span class="dialogue">&ldquo;I was.&rdquo;</span> <span class="dialogue">&ldquo;I know. I checked.&rdquo;</span> He means it as love.</p>
+
+      <p><span class="dialogue">&ldquo;The Orchard&rsquo;s children stopped walking in &rsquo;thirty-nine, so I raised one outside it. A Hargrave with a name and a rank and a family to love, who would walk down that stair for my son one night without being asked. I couldn&rsquo;t order it. An order would have spoiled you.&rdquo;</span></p>
+
+      <p>It is the worst thing he says all night.</p>
+
+      <p><span class="dialogue">&ldquo;There was always a way out. Free her, and pay in light. Alistair chose sons.&rdquo;</span> He names his sister Otty, who walked down the stair singing when she was nineteen. He was eight. <span class="dialogue">&ldquo;They told me Switzerland, and they cut it in brass. And the Crown knew. Every Lord Chancellor since 1689 has signed the annex.&rdquo;</span> Then: <span class="dialogue">&ldquo;I could have gone down that stair myself. I raised a boy for it instead.&rdquo;</span></p>
+
+      <p>He presses the wolf-crest ring into Nathaniel&rsquo;s palm. <span class="dialogue">&ldquo;Don&rsquo;t be me. The lock opens with what closed it: Harding blood, this ring, and a blade that&rsquo;s already in it.&rdquo;</span></p>
+
+      <p>Nathaniel&rsquo;s hand goes behind him without looking, and finds Alice&rsquo;s.</p>
+
+      <p>Eldgard dies. Snow settles on his open eyes.</p>
+
+      <p>At the core, the Heartglass is cracking around the creature. Morgana strains against her hooks. Josephine is at the lever. <span class="dialogue">&ldquo;Your father said her mother would never allow it.&rdquo;</span> <span class="dialogue">&ldquo;Then don&rsquo;t.&rdquo;</span> <span class="dialogue">&ldquo;Four hundred years in hooks, Nathaniel. Nobody refuses the door.&rdquo;</span></p>
+
+      <p>She pulls the lever.</p>
+    </div>
+  </section>
+
+  <div class="divider"><svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 3c1.66 0 3 1.34 3 3s-1.34 3-3 3-3-1.34-3-3 1.34-3 3-3zm0 14.2c-2.5 0-4.71-1.28-6-3.22.03-1.99 4-3.08 6-3.08 1.99 0 5.97 1.09 6 3.08-1.29 1.94-3.5 3.22-6 3.22z"/></svg></div>
+
+  <!-- EPISODE 10 -->
+  <section class="episode" id="ep10">
+    <div class="ep-header">
+      <span class="ep-number">Episode 10</span>
+      <h2 class="ep-title">&ldquo;The Tithe&rdquo;</h2>
+      <span class="ep-countdown">The Last Night &mdash; Midnight to Dawn</span>
+    </div>
+    <div class="ep-body">
+      <p>1489, one last time. Alistair at the chain, the child in his net. Morgana, fresh in her hooks: <span class="dialogue">&ldquo;Free me, and pay in light. Keep me, and pay in sons. Either way, my child goes free tonight.&rdquo;</span> He slides the wolf-crest ring on. <span class="dialogue">&ldquo;Sons.&rdquo;</span> He cuts the net. Behind him, Edric, nine, carries the lantern down the stair ahead of his father. Alone.</p>
+
+      <p>The lever drops. Green fire floods the creature. She screams. The door swings open for Morgana &mdash; the hooks loosen and for the first time in four hundred years she could step out. She doesn&rsquo;t. She takes the chain in both hands and drags herself back onto the iron, hooks tearing deeper. <span class="dialogue">&ldquo;Not her.&rdquo;</span> The chain shudders and doesn&rsquo;t take.</p>
+
+      <p>Alice smashes the Heartglass and drags the creature out, half turned to crystal. Josephine draws her knives to put the girl back in the cracked cage &mdash; the marshals are already coming for Nathaniel, and a broken cage is still a cage until midnight. Josephine fights Alice, Vykra against Vykra, the mother against the girl she paid to love her son. Nathaniel steps between them.</p>
+
+      <p>Nixon comes down the stair bleeding. <span class="dialogue">&ldquo;I&rsquo;m Harding blood. Take me. They grew me for this the way they grew my mother. Let me be something on purpose.&rdquo;</span></p>
+
+      <p>Nathaniel: <span class="dialogue">&ldquo;No one goes in the chain again.&rdquo;</span> Jamie&rsquo;s glass blade is still frozen in the lock where he left it the first night. Nathaniel pulls. It doesn&rsquo;t move. Alice is beside him before he asks, her gauntlet already whining up to overload. He knows what she&rsquo;s about to do. <span class="dialogue">&ldquo;If this works, every light in London goes out. They&rsquo;ll hate me for a hundred years.&rdquo;</span> <span class="dialogue">&ldquo;Us.&rdquo;</span> She puts the gauntlet&rsquo;s core against the iron. The heat burns back into her palm and she holds it there until the ice lets go. He pulls the blade free, cuts his palm, and presses his blood and his father&rsquo;s ring into the iron.</p>
+
+      <p>A church bell strikes twelve.</p>
+
+      <p>The chain falls. The green dies street by street. A tram dying in the snow. A hospital ward going black. A mother on Gin Lane lighting a tallow candle with shaking hands. Under the Works, for the first time since he was five, nothing is crying in the walls.</p>
+
+      <p>Morgana rises nine feet tall. She says his name the way she sang it to a five-year-old: <span class="dialogue">&ldquo;Nathaniel.&rdquo;</span> Then: <span class="dialogue">&ldquo;A Harding opened it.&rdquo;</span> The White pours through behind her. Wind, snow, wolves. She goes up through the Works toward Tyburn hill.</p>
+
+      <p>Nixon fights Ajax one last time &mdash; quench-blade against Black Gauntlet. He freezes the piston and puts the blade through. Ajax dies frozen mid-laugh, his apple rolling down the stairs.</p>
+
+      <p>London&rsquo;s longest night. Nixon&rsquo;s Lanterns hold flash-lines across the bridges. The Vykra hold Gin Lane with knives and Lambrick coal. Cole holds a barricade on Tyburn Road with his last cartridge, two fingers short and seventeen years old. Nixon finds him in the last dark before dawn, sitting against an overturned tram as if he were resting. His diary is open in his lap. Under the burned log page: <em>Held the road. Nobody past who shouldn&rsquo;t be.</em></p>
+
+      <p>On Tyburn hill, Morgana stands over London with wolves in a ring. Josephine climbs. Nathaniel climbs after her. Alice comes up carrying the creature.</p>
+
+      <p>The creature sets herself down between her mother and the city, in the place nobody ever stood for Alice. She sings the hymn back to Morgana in the old tongue &mdash; the tune before it had words. <span class="dialogue">&ldquo;They let you go. Let them go.&rdquo;</span> Morgana: <span class="dialogue">&ldquo;They bled me for four hundred years.&rdquo;</span> <span class="dialogue">&ldquo;One of them let you go.&rdquo;</span></p>
+
+      <p>In the Works vault, Lambrick has been filling satchels with dying gallowglass all night. Tamara finds him. <span class="dialogue">&ldquo;Come out, Father.&rdquo;</span> He holds up a satchel: <span class="dialogue">&ldquo;This is for you. All of it.&rdquo;</span> <span class="dialogue">&ldquo;Then leave it.&rdquo;</span> He looks at the crystals. He looks at her. He can&rsquo;t put them down. She walks out. The wolves come in.</p>
+
+      <p>Back on the hill. <span class="dialogue">&ldquo;Then come home, little frost.&rdquo;</span> The creature looks at Alice. Alice, who has spent the whole season holding on: <span class="dialogue">&ldquo;Go, if you want to. I&rsquo;ll be all right.&rdquo;</span> She means it.</p>
+
+      <p>The creature tells her the last thing. <span class="dialogue">&ldquo;On the bridge she was still alive. She asked me something. &lsquo;Go back to Ali. Stand in front of her. I never did.&rsquo; I said yes. Then I wanted to.&rdquo;</span></p>
+
+      <p>The creature stays. Morgana draws the White out of her daughter &mdash; lays a hand on her chest and pulls it like a splinter. The crystal goes out of the girl&rsquo;s skin. She will never make snow again. She&rsquo;s shivering for the first time.</p>
+
+      <p><span class="dialogue">&ldquo;A Harding chained me. A Harding comes with me.&rdquo;</span> Morgana waits. It has to be given. Nathaniel steps forward. Alice steps in front of him. Her fist in his coat. <span class="dialogue">&ldquo;Don&rsquo;t.&rdquo;</span></p>
+
+      <p>Josephine steps past both of them. <span class="dialogue">&ldquo;Not him.&rdquo;</span> Morgana knows her. To her son: <span class="dialogue">&ldquo;I&rsquo;m a Harding. I chose the name.&rdquo;</span> He catches her wrist. Alice is still in front of him. Two women holding him, one from each side of his life. <span class="dialogue">&ldquo;They&rsquo;ll say I died of fever in Switzerland.&rdquo;</span> Nathaniel: <span class="dialogue">&ldquo;No. They&rsquo;ll say your name.&rdquo;</span> His hand opens. <span class="dialogue">&ldquo;Go.&rdquo;</span></p>
+
+      <p>She kisses his forehead. To Alice: <span class="dialogue">&ldquo;Keep him out of the Works.&rdquo;</span> She takes Morgana&rsquo;s hand and walks into the white. The wolves follow. The storm goes with them.</p>
+
+      <p>Dawn. Nathaniel is on his knees. Alice kneels in front of him and lets him have it. When it comes it isn&rsquo;t crying &mdash; just a sound with no word in it. She takes the handkerchief from her glove and tears it in two. Half for the palm he cut at the lock. He takes the other half and binds the hand she burned. Neither of them is any good at it.</p>
+
+      <p>She counts for him, under her breath. <span class="dialogue">&ldquo;One post. Two post.&rdquo;</span> At eight she stops. He keeps going. <span class="dialogue">&ldquo;Nine.&rdquo;</span> Nobody told him about nine.</p>
+
+      <p><span class="dialogue">&ldquo;Alice.&rdquo;</span> He&rsquo;s never once said it. She heard it on a bill. He&rsquo;s saying it now, when nobody has paid for it.</p>
+
+      <p class="scene-break">&bull; &bull; &bull;</p>
+
+      <p>Westminster. Nathaniel reads the record. Name by name by name, while the images of what the season has done play out across the days that follow:</p>
+
+      <p>Edric Harding, nine years old, who carried the lantern. The Hargraves, scratched on a wall. Ottoline Harding, who did not die abroad &mdash; a chisel takes the words off a brass plate, one letter at a time. Jamie, whose coffin held slag. Felix Hawke, poisoned on the stand. Josephine, who walked into the White so the debt would end. <span class="dialogue">&ldquo;For four hundred years this city was warm because somebody was cold.&rdquo;</span></p>
+
+      <p>The Gin Lane children skip rope to the old rhyme with a new last line: <em>nobody&rsquo;s in the cellar tonight.</em></p>
+
+      <p>Nixon lights Cole&rsquo;s battered Wick lamp on the Guard roof with a match. A plain flame. Tamara stands beside him.</p>
+
+      <p><span class="dialogue">&ldquo;We will be cold for a while. We&rsquo;ll build something that doesn&rsquo;t need a girl in chains or a boy on the stair. It may be worse. It will be ours.&rdquo;</span></p>
+
+      <p>Nathaniel drops the wolf-crest ring into a dead grate. Alice sets Jamie&rsquo;s ring beside it. His bound hand comes to rest over her bound hand. Two halves of one handkerchief.</p>
+
+      <p class="scene-break">&bull; &bull; &bull;</p>
+
+      <p>Hard cut. The White. Wind and nothing else. Josephine walks beside Morgana through the drifts and stops. A man is standing in the snow with frost in his hair. Jamie. Exactly as he went down. His breath doesn&rsquo;t smoke. His eyes don&rsquo;t move. Far behind him, small in the white, a boy of nine stands with a lantern raised, the flame still burning after four hundred years.</p>
+
+      <p>Josephine sits down beside her son.</p>
+
+      <p style="text-align:center; font-weight:700; letter-spacing:0.2em; color:var(--accent-glow); margin-top:3rem; font-size:1.3rem;">DAY ONE.</p>
+    </div>
+  </section>
+
+</div>
+
+</body></html>
